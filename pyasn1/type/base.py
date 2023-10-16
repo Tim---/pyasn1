@@ -307,12 +307,8 @@ class SimpleAsn1Type(Asn1Type):
     def __ge__(self, other):
         return self._value >= other
 
-    if sys.version_info[0] <= 2:
-        def __nonzero__(self):
-            return self._value and True or False
-    else:
-        def __bool__(self):
-            return self._value and True or False
+    def __bool__(self):
+        return self._value and True or False
 
     def __hash__(self):
         return hash(self._value)
@@ -563,12 +559,8 @@ class ConstructedAsn1Type(Asn1Type):
     def __ge__(self, other):
         return self.components >= other
 
-    if sys.version_info[0] <= 2:
-        def __nonzero__(self):
-            return bool(self.components)
-    else:
-        def __bool__(self):
-            return bool(self.components)
+    def __bool__(self):
+        return bool(self.components)
 
     @property
     def components(self):
